@@ -1,296 +1,286 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Spotify Data - Rodrigo Weiss</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* 1. CONFIGURACIÓN GENERAL */
-        body {
-            background-color: #121212;
-            color: #FFFFFF;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        /* 2. LOGO FIJO */
-        .fixed-logo-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: rgba(18, 18, 18, 0.95);
-            display: flex;
-            align-items: center;
-            padding-left: 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        .fixed-logo-container img {
-            height: 35px;
-            width: auto;
-        }
-
-        /* 3. ENCABEZADO Y PRESENTACIÓN */
-        .header-presentacion {
-            text-align: center;
-            padding: 120px 20px 40px 20px; 
-            background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
-        }
-
-       h1 {
-    display: flex;         /* Permite alinear logo y texto en la misma línea */
-    align-items: center;   /* Centra verticalmente el logo con el texto */
-    justify-content: center; /* Mantiene el título centrado en la página */
-    gap: 15px;             /* Espacio entre el logo y la palabra Spotify */
-    color: #1DB954; 
-    font-size: 3rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.logo-titulo {
-    height: 50px;          /* Ajusta este valor según qué tan grande quieras el logo */
-    width: auto;           /* Mantiene la proporción original */
-}
-
-/* Ajuste para móviles */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-        flex-direction: column; /* En celular, el logo arriba y el texto abajo si no caben */
-        gap: 10px;
-    }
-    .logo-titulo {
-        height: 40px;
-    }
-}
-
-        .datos-tp {
-            color: #B3B3B3;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid #282828;
-            width: 100px;
-            margin: 20px auto;
-        }
-
-        .descripcion-intro {
-            color: #B3B3B3;
-            max-width: 700px;
-            margin: 20px auto;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        /* 4. CUADROS DE ESTADÍSTICAS (3x2) */
-        .overview-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .stat-item {
-            background-color: #181818;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background-color: #282828;
-        }
-
-        .stat-number {
-            display: block;
-            color: #1DB954;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: #B3B3B3; /* Corregido de negro a gris */
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* 5. CONTENEDOR DE GRÁFICOS */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .seccion-titulo {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #282828;
-            padding-bottom: 10px;
-        }
-
-        .grid-datos {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .tarjeta {
-            background-color: #181818;
-            padding: 30px;
-            border-radius: 10px;
-        }
-
-        .tarjeta h3 {
-            color: #1DB954;
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-
-        .placeholder-grafico {
-            background-color: #222;
-            width: 100%;
-            height: 450px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            border: 1px dashed #333;
-        }
-      .intro-stats {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 10px;
-}
-
-.intro-stats h2 {
-    color: #FFFFFF;
-    font-size: 1.8rem; /* Tamaño intermedio */
-    margin-bottom: 5px;
-}
-
-.intro-stats p {
-    color: #B3B3B3;
-    font-size: 1rem;
-    margin-top: 0;
-}
-      .intro-stats {
-    text-align: center;
-    margin-top: 80px;      /* Mucho espacio arriba para separar del texto anterior */
-    margin-bottom: 20px;
-    padding-top: 40px;     /* Espacio entre la línea y el título */
-    border-top: 1px solid #282828; /* Una línea sutil que cruza */
-    max-width: 800px;      /* Para que la línea no sea tan larga como toda la pantalla */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .overview-stats { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
-        }
-      
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TP Spotify Data - Rodrigo Weiss</title>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+	/* 1. CONFIGURACIÓN GENERAL */
+	
+	body {
+		background-color: #121212;
+		color: #FFFFFF;
+		font-family: 'Montserrat', sans-serif;
+		margin: 0;
+		padding: 0;
+		line-height: 1.6;
+	}
+	/* 2. LOGO FIJO */
+	
+	.fixed-logo-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		background-color: rgba(18, 18, 18, 0.95);
+		display: flex;
+		align-items: center;
+		padding-left: 20px;
+		z-index: 1000;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	}
+	
+	.fixed-logo-container img {
+		height: 35px;
+		width: auto;
+	}
+	/* 3. ENCABEZADO Y PRESENTACIÓN */
+	
+	.header-presentacion {
+		text-align: center;
+		padding: 120px 20px 40px 20px;
+		background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
+	}
+	
+	h1 {
+		display: flex;
+		/* Permite alinear logo y texto en la misma línea */
+		align-items: center;
+		/* Centra verticalmente el logo con el texto */
+		justify-content: center;
+		/* Mantiene el título centrado en la página */
+		gap: 15px;
+		/* Espacio entre el logo y la palabra Spotify */
+		color: #1DB954;
+		font-size: 3rem;
+		margin-bottom: 10px;
+		font-weight: 700;
+	}
+	
+	.logo-titulo {
+		height: 50px;
+		/* Ajusta este valor según qué tan grande quieras el logo */
+		width: auto;
+		/* Mantiene la proporción original */
+	}
+	/* Ajuste para móviles */
+	
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+			flex-direction: column;
+			/* En celular, el logo arriba y el texto abajo si no caben */
+			gap: 10px;
+		}
+		.logo-titulo {
+			height: 40px;
+		}
+	}
+	
+	.datos-tp {
+		color: #B3B3B3;
+		font-size: 1.1rem;
+		margin-bottom: 20px;
+	}
+	
+	hr {
+		border: 0;
+		border-top: 1px solid #282828;
+		width: 100px;
+		margin: 20px auto;
+	}
+	
+	.descripcion-intro {
+		color: #B3B3B3;
+		max-width: 700px;
+		margin: 20px auto;
+		text-align: center;
+		font-size: 1.1rem;
+	}
+	/* 4. CUADROS DE ESTADÍSTICAS (3x2) */
+	
+	.overview-stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		max-width: 1000px;
+		margin: 40px auto;
+		padding: 0 20px;
+	}
+	
+	.stat-item {
+		background-color: #181818;
+		padding: 25px;
+		border-radius: 12px;
+		text-align: center;
+		transition: transform 0.3s ease, background-color 0.3s ease;
+	}
+	
+	.stat-item:hover {
+		transform: translateY(-5px);
+		background-color: #282828;
+	}
+	
+	.stat-number {
+		display: block;
+		color: #1DB954;
+		font-size: 2.2rem;
+		font-weight: 700;
+		margin-bottom: 5px;
+	}
+	
+	.stat-label {
+		color: #FFFFFF;
+		/*blanco*/
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	/* 5. CONTENEDOR DE GRÁFICOS */
+	
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 40px 20px;
+	}
+	
+	.seccion-titulo {
+		font-size: 1.8rem;
+		margin-bottom: 30px;
+		border-bottom: 1px solid #282828;
+		padding-bottom: 10px;
+	}
+	
+	.grid-datos {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+	
+	.tarjeta {
+		background-color: #181818;
+		padding: 30px;
+		border-radius: 10px;
+	}
+	
+	.tarjeta h3 {
+		color: #1DB954;
+		margin-top: 0;
+		font-size: 1.5rem;
+	}
+	
+	.placeholder-grafico {
+		background-color: #222;
+		width: 100%;
+		height: 450px;
+		border-radius: 8px;
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #555;
+		border: 1px dashed #333;
+	}
+	
+	.intro-stats {
+		text-align: center;
+		margin-top: 40px;
+		margin-bottom: 10px;
+	}
+	
+	.intro-stats h2 {
+		color: #FFFFFF;
+		font-size: 1.8rem;
+		/* Tamaño intermedio */
+		margin-bottom: 5px;
+	}
+	
+	.intro-stats p {
+		color: #B3B3B3;
+		font-size: 1rem;
+		margin-top: 0;
+	}
+	
+	.intro-stats {
+		text-align: center;
+		margin-top: 80px;
+		/* Mucho espacio arriba para separar del texto anterior */
+		margin-bottom: 20px;
+		padding-top: 40px;
+		/* Espacio entre la línea y el título */
+		border-top: 1px solid #282828;
+		/* Una línea sutil que cruza */
+		max-width: 800px;
+		/* Para que la línea no sea tan larga como toda la pantalla */
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	footer {
+		text-align: center;
+		padding: 60px 20px;
+		color: #555;
+		font-size: 0.8rem;
+	}
+	/* RESPONSIVE */
+	
+	@media (max-width: 768px) {
+		.overview-stats {
+			grid-template-columns: 1fr;
+		}
+		h1 {
+			font-size: 2rem;
+		}
+	}
+	</style>
 </head>
+
 <body>
-
-    <div class="fixed-logo-container">
-        <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo">
-    </div>
-
-    <header class="header-presentacion">
-        <h1>
+	<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
+	<header class="header-presentacion">
+		<h1>
     <img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo">
     Spotify y mis hábitos
 </h1>
-        <div class="datos-tp">
-            <p><strong>Materia:</strong> Infovis - ECD.2025.A | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
-        </div>
-        <hr>
-        <p class="descripcion-intro">
-            En este trabajo práctico se presenta un análisis del historial de reproducciones en Spotify entre los años 2019 y 2026. 
-            Exploraremos tendencias de escucha, artistas predominantes y la evolución de mi consumo musical a través de visualizaciones interactivas.
-        </p>
-        <div class="intro-stats">
-    <h2>Resumen de Actividad</h2>
-    <p>Métricas generales entre el 1/11/2019 y 7/3/2026</p>
-</div>
-        <section class="overview-stats">
-            <div class="stat-item">
-                <span class="stat-number">251.554</span>
-                <span class="stat-label">Minutos Reproducidos</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">63.878</span>
-                <span class="stat-label">Canciones Escuchadas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">4.545</span>
-                <span class="stat-label">Álbumes Escuchados</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">2.462</span>
-                <span class="stat-label">Artistas distintos</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">7.407</span>
-                <span class="stat-label">Canciones Únicas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">108</span>
-                <span class="stat-label">Minutos por día (Promedio)</span>
-            </div>
-        </section>
-    </header>
-
-    <main class="container">
-        <h2 class="seccion-titulo">Análisis Detallado</h2>
-        
-        <div class="grid-datos">
-            <div class="tarjeta">
-                <h3>Top Artistas</h3>
-                <p>Evolución de los 10 artistas más escuchados a lo largo del período seleccionado.</p>
-                <div class="placeholder-grafico"> [Aquí insertarás tu primer gráfico] </div>
-            </div>
-
-            <div class="tarjeta">
-                <h3>Géneros Favoritos</h3>
-                <p>Distribución porcentual de los géneros musicales que definen mi biblioteca.</p>
-                <div class="placeholder-grafico"> [Aquí insertarás tu segundo gráfico] </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>Trabajo Práctico para la materia Infovis - Datos obtenidos vía Spotify Privacy Request.</p>
-    </footer>
-
+		<div class="datos-tp">
+			<p><strong>Materia:</strong> Infovis - ECD.2025.A | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
+		</div>
+		<hr>
+		<p class="descripcion-intro"> En este trabajo práctico se presenta un análisis del historial de reproducciones en Spotify entre los años 2019 y 2026. Exploraremos tendencias de escucha, artistas predominantes y la evolución de mi consumo musical a través de visualizaciones interactivas. </p>
+		<div class="intro-stats">
+			<h2>Resumen de Actividad</h2>
+			<p>Métricas generales entre el 1/11/2019 y 7/3/2026</p>
+		</div>
+		<section class="overview-stats">
+			<div class="stat-item"> <span class="stat-number">251.554</span> <span class="stat-label">Minutos Reproducidos</span> </div>
+			<div class="stat-item"> <span class="stat-number">63.878</span> <span class="stat-label">Canciones Escuchadas</span> </div>
+			<div class="stat-item"> <span class="stat-number">4.545</span> <span class="stat-label">Álbumes Escuchados</span> </div>
+			<div class="stat-item"> <span class="stat-number">2.462</span> <span class="stat-label">Artistas distintos</span> </div>
+			<div class="stat-item"> <span class="stat-number">7.407</span> <span class="stat-label">Canciones Únicas</span> </div>
+			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
+		</section>
+	</header>
+	<main class="container">
+		<h2 class="seccion-titulo">Análisis Detallado</h2>
+		<div class="grid-datos">
+			<div class="tarjeta">
+				<h3>Top Artistas</h3>
+				<p>Evolución de los 10 artistas más escuchados a lo largo del período seleccionado.</p>
+				<div class="placeholder-grafico"> [Aquí insertarás tu primer gráfico] </div>
+			</div>
+			<div class="tarjeta">
+				<h3>Géneros Favoritos</h3>
+				<p>Distribución porcentual de los géneros musicales que definen mi biblioteca.</p>
+				<div class="placeholder-grafico"> [Aquí insertarás tu segundo gráfico] </div>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<p>Trabajo Práctico para la materia Infovis - Datos obtenidos vía Spotify Privacy Request.</p>
+	</footer>
 </body>
+
 </html>
