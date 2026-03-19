@@ -60,4 +60,96 @@
         .seccion-titulo {
             font-size: 1.5rem;
             margin-bottom: 20px;
-            border-bottom: 1px solid #2
+            border-bottom: 1px solid #282828;
+            padding-bottom: 10px;
+        }
+
+        /* Diseño de tarjetas para los datos */
+        .grid-datos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tarjeta {
+            background-color: #181818;
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            text-align: left; /* El contenido de la tarjeta va a la izquierda */
+        }
+
+        .tarjeta:hover {
+            background-color: #282828; /* Efecto al pasar el mouse */
+        }
+
+        .tarjeta h3 {
+            color: #1DB954;
+            margin-top: 0;
+        }
+
+        /* Estilo para los gráficos (marcador de posición) */
+        .placeholder-grafico {
+            background-color: #333;
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #B3B3B3;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-presentacion">
+        <h1>Mi Spotify Data</h1>
+        <div class="datos-tp">
+            <p><strong>Materia:</strong> [Nombre de la Materia]</p>
+            <p><strong>Alumno:</strong> [Tu Nombre y Apellido]</p>
+            <p><strong>Año:</strong> 2024 / 2025</p>
+        </div>
+        <hr>
+    </header>
+
+    <main class="container">
+        
+        <h2 class="seccion-titulo">Análisis de Reproducciones</h2>
+        
+        <div class="grid-datos">
+            <div class="tarjeta">
+                <h3>Top Artistas</h3>
+                <p>Aquí puedes incluir una lista o un gráfico de barras con tus artistas más escuchados.</p>
+                <div class="placeholder-grafico"> [Espacio para Gráfico 1] </div>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Géneros Favoritos</h3>
+                <p>Análisis de los géneros que predominaron en tus últimos 3 años.</p>
+                <div class="placeholder-grafico"> [Espacio para Gráfico 2] </div>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Uso de la App</h3>
+                <p>¿A qué hora escuchas más música? (Mañana vs. Noche).</p>
+                <div class="placeholder-grafico"> [Espacio para Gráfico 3] </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Trabajo Práctico realizado con datos exportados de Spotify Privacy.</p>
+    </footer>
+
+</body>
+</html>
