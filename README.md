@@ -2,6 +2,5 @@
 
 #https://rodrigo-weiss.github.io/infovis/
 
-#TP
-
+TP:
 #https://rodrigo-weiss.github.io/infovis/TP_Infoviz.html
