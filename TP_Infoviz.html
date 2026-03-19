@@ -52,7 +52,7 @@
 
         /* 3. CONTENEDOR DE GRÁFICOS Y CONTENIDO */
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -66,40 +66,30 @@
 
         /* Diseño de tarjetas para los datos */
         .grid-datos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .tarjeta {
-            background-color: #181818;
-            padding: 20px;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-            text-align: left; /* El contenido de la tarjeta va a la izquierda */
-        }
-
-        .tarjeta:hover {
-            background-color: #282828; /* Efecto al pasar el mouse */
-        }
-
-        .tarjeta h3 {
-            color: #1DB954;
-            margin-top: 0;
-        }
-
-        /* Estilo para los gráficos (marcador de posición) */
-        .placeholder-grafico {
-            background-color: #333;
-            width: 100%;
-            height: 200px;
-            border-radius: 5px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            margin-top: 15px;
-        }
+    flex-direction: column; /* Esto obliga a que vayan de arriba hacia abajo */
+    gap: 30px;              /* Espacio vertical entre cada tarjeta */
+}
+
+      .tarjeta {
+    background-color: #181818;
+    padding: 30px;          /* Más aire adentro de la tarjeta */
+    border-radius: 10px;
+    width: 100%;            /* Que ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+/* Ajustamos el tamaño del espacio para el gráfico */
+.placeholder-grafico {
+    background-color: #222;
+    width: 100%;
+    height: 400px;         /* Aumentamos la altura para que el gráfico sea "grande" */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
 
         footer {
             text-align: center;
@@ -112,11 +102,11 @@
 <body>
 
     <header class="header-presentacion">
-        <h1>Mi Spotify Data</h1>
+        <h1>Spotify y mis hábitos</h1>
         <div class="datos-tp">
-            <p><strong>Materia:</strong> [Nombre de la Materia]</p>
-            <p><strong>Alumno:</strong> [Tu Nombre y Apellido]</p>
-            <p><strong>Año:</strong> 2024 / 2025</p>
+            <p><strong>Materia:</strong> Vizualizacion de la información - ECD 2025 A</p>
+            <p><strong>Alumno:</strong> Rodrigo Weiss</p>
+            <p><strong>Años:</strong> 2026</p>
         </div>
         <hr>
     </header>
