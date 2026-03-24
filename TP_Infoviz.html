@@ -1,275 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>TP Spotify Data - Rodrigo Weiss</title>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-	<style>
-	/* 1. CONFIGURACIÓN GENERAL */
-	:root {
-    color-scheme: dark; /* Esto le dice al navegador que la web ES oscura */
-}
-		iframe, object, .tableauPlaceholder {
-    background-color: #121212 !important;
-    filter: brightness(0.9) contrast(1.1); /* Opcional: para que los colores resalten más */
-}
-	body {
-		background-color: #121212;
-		color: #FFFFFF;
-		font-family: 'Montserrat', sans-serif;
-		margin: 0;
-		padding: 0;
-		line-height: 1.6;
-	}
-	/* 2. LOGO FIJO */
-	
-	.fixed-logo-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 60px;
-		background-color: rgba(18, 18, 18, 0.95);
-		display: flex;
-		align-items: center;
-		padding-left: 20px;
-		z-index: 1000;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-	}
-	
-	.fixed-logo-container img {
-		height: 35px;
-		width: auto;
-	}
-	/* 3. ENCABEZADO Y PRESENTACIÓN */
-	
-	.header-presentacion {
-		text-align: center;
-		padding: 120px 20px 40px 20px;
-		background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
-	}
-	
-	h1 {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 15px;
-		color: #1DB954;
-		font-size: 3rem;
-		margin-bottom: 10px;
-		font-weight: 700;
-	}
-	
-	.logo-titulo {
-		height: 50px;
-		width: auto;
-	}
-	
-	@media (max-width: 768px) {
-		h1 {
-			font-size: 2rem;
-			flex-direction: column;
-			gap: 10px;
-		}
-		.logo-titulo {
-			height: 40px;
-		}
-		.overview-stats {
-			grid-template-columns: 1fr !important;
-		}
-	}
-	
-	.datos-tp {
-		color: #B3B3B3;
-		font-size: 1.1rem;
-		margin-bottom: 20px;
-	}
-	
-	.descripcion-intro {
-		color: #B3B3B3;
-		max-width: 700px;
-		margin: 20px auto;
-		text-align: center;
-		font-size: 1.1rem;
-	}
-	/* 4. SECCIÓN RESUMEN (CUADROS) */
-	
-	.intro-stats {
-		text-align: center;
-		margin: 80px auto 20px;
-		padding-top: 40px;
-		border-top: 1px solid #282828;
-		max-width: 800px;
-	}
-	
-	.overview-stats {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
-		max-width: 1000px;
-		margin: 40px auto;
-		padding: 0 20px;
-	}
-	
-	.stat-item {
-		background-color: #181818;
-		padding: 25px;
-		border-radius: 12px;
-		text-align: center;
-		transition: transform 0.3s ease;
-	}
-	
-	.stat-item:hover {
-		transform: translateY(-5px);
-		background-color: #282828;
-	}
-	
-	.stat-number {
-		display: block;
-		color: #1DB954;
-		font-size: 2.2rem;
-		font-weight: 700;
-	}
-	
-	.stat-label {
-		color: #FFFFFF;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-	}
-	/* 5. CONTENEDOR DE GRÁFICOS */
-	
-	.container {
-		max-width: 1000px;
-		margin: 0 auto;
-		padding: 40px 20px;
-	}
-	
-	.seccion-titulo {
-		font-size: 1.8rem;
-		margin-bottom: 30px;
-		border-bottom: 1px solid #282828;
-		padding-bottom: 10px;
-	}
-	
-	.tarjeta {
-		background-color: #181818;
-		padding: 30px;
-		border-radius: 10px;
-		margin-bottom: 40px;
-	}
-	
-	.tarjeta h3 {
-		color: #1DB954;
-		margin-top: 0;
-		font-size: 1.5rem;
-	}
-	
-	.sub-titulo-grafico {
-		color: #FFFFFF;
-		font-size: 1rem;
-		margin: 20px 0 15px 0;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		opacity: 0.8;
-	}
-	
-	.divisor-interno {
-		height: 1px;
-		background: linear-gradient(to right, transparent, #282828, transparent);
-		margin: 30px 0;
-	}
-	
-	.texto-insight {
-		color: #B3B3B3;
-		font-style: italic;
-		font-size: 0.95rem;
-		margin: 15px 0;
-		padding: 0 10px;
-		border-left: 3px solid #1DB954;
-	}
-	
-	.contenedor-tableau {
-		background-color: #181818;
-		/* Cambiado para que coincida con la tarjeta */
-		border-radius: 8px;
-		overflow: hidden;
-		padding: 10px;
-		display: flex;
-		justify-content: center;
-	}
-	
-	footer {
-		text-align: center;
-		padding: 60px 20px;
-		color: #555;
-		font-size: 0.8rem;
-	}
-	</style>
-</head>
-
-<body>
-	<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
-	<header class="header-presentacion">
-		<h1>
-			<img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo">
-			Spotify y mis hábitos
-		</h1>
-		<div class="datos-tp">
-			<p><strong>Materia:</strong> Infovis - ECD.2025.A | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
-		</div>
-		<p class="descripcion-intro"> En este trabajo práctico se presenta un análisis del historial de reproducciones en Spotify entre Noviembre de 2019 y Marzo 2026. Exploraremos tendencias de escucha, artistas predominantes y la evolución de mi consumo musical a través de visualizaciones interactivas. </p>
-		<div class="intro-stats">
-			<h2>Resumen de Actividad</h2>
-			<p>Métricas generales entre el 1/11/2019 y 7/3/2026</p>
-		</div>
-		<section class="overview-stats">
-			<div class="stat-item"> <span class="stat-number">251.554</span> <span class="stat-label">Minutos Reproducidos</span> </div>
-			<div class="stat-item"> <span class="stat-number">63.878</span> <span class="stat-label">Canciones Escuchadas</span> </div>
-			<div class="stat-item"> <span class="stat-number">4.545</span> <span class="stat-label">Álbumes Escuchados</span> </div>
-			<div class="stat-item"> <span class="stat-number">2.462</span> <span class="stat-label">Artistas distintos</span> </div>
-			<div class="stat-item"> <span class="stat-number">7.407</span> <span class="stat-label">Canciones Únicas</span> </div>
-			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
-		</section>
-	</header>
-	<main class="container">
-		<h2 class="seccion-titulo">Análisis Detallado</h2>
-		<div class="grid-datos">
-			<div class="tarjeta">
-				<h3>Top Artistas</h3>
-				<p>Top 20 de Artistas/Podcasts más escuchados durante todo el período y sus géneros</p>
-				  <object type="image/svg+xml" data="./Sunburst.svg"></object>
-				<p>Top 20 de Artistas/Podcasts más escuchados durante todo el período por cantidad de minutos y su prevalencia por año</p>
-				<div class="flourish-embed flourish-chart" data-src="visualisation/28130928">
-					<script src="https://public.flourish.studio/resources/embed.js"></script>
-					<noscript><img src="https://public.flourish.studio/visualisation/28130928/thumbnail" width="100%" alt="visualization" /></noscript>
-				</div>
-			</div>
-			<div class="tarjeta">
-				<h3>Análisis de Tiempo Escuchado</h3>
-				<p>Comparativa entre el acumulado histórico total y el desglose detallado por año para identificar patrones estacionales desde 2020 hasta 2025.</p>
-				<div class="sub-grafico">
-					<h4 class="sub-titulo-grafico">Total Histórico por Mes</h4>
-					<div style="min-height:458px" id="datawrapper-vis-8ey2N">
-						<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/8ey2N/embed.js" charset="utf-8" data-target="#datawrapper-vis-8ey2N"></script>
-						<noscript><img src="https://datawrapper.dwcdn.net/8ey2N/full.png" alt="Acumulado histórico por mes" /></noscript>
-					</div>
-				</div>
-				<div class="divisor-interno"></div>
-				<div class="sub-grafico">
-					<h4 class="sub-titulo-grafico">Evolución Anual Detallada</h4>
-					<div style="min-height:655px" id="datawrapper-vis-sNJYF">
-						<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/sNJYF/embed.js" charset="utf-8" data-target="#datawrapper-vis-sNJYF"></script>
-						<noscript><img src="https://datawrapper.dwcdn.net/sNJYF/full.png" alt="Tiempo acumulado de minutos por mes" /></noscript>
-					</div>
-				</div>
-			</div>
-			<div class="tarjeta">
-				<h3>Rituales de Escucha: Día y Hora</h3>
-				<p>Exploración interactiva de la densidad de escucha.</p>
-				<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
+<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
 	<noscript>
 		<a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify3_17743719950620&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
 	</noscript>
@@ -308,16 +37,343 @@ var scriptElement = document.createElement('script');
 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
 vizElement.parentNode.insertBefore(scriptElement, vizElement);
 </script>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TP Spotify Data - Rodrigo Weiss</title>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+	/* 1. CONFIGURACIÓN GENERAL Y MODO OSCURO */
+	
+	:root {
+		color-scheme: dark;
+	}
+	
+	iframe,
+	object,
+	.tableauPlaceholder {
+		background-color: #121212 !important;
+	}
+	
+	body {
+		background-color: #121212 !important;
+		color: #FFFFFF !important;
+		font-family: 'Montserrat', sans-serif;
+		margin: 0;
+		padding: 0;
+		line-height: 1.6;
+	}
+	/* 2. LOGO FIJO */
+	
+	.fixed-logo-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		background-color: rgba(18, 18, 18, 0.95);
+		display: flex;
+		align-items: center;
+		padding-left: 20px;
+		z-index: 1000;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	}
+	
+	.fixed-logo-container img {
+		height: 35px;
+		width: auto;
+	}
+	/* 3. ENCABEZADO */
+	
+	.header-presentacion {
+		text-align: center;
+		padding: 120px 20px 40px 20px;
+		background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
+	}
+	
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 15px;
+		color: #1DB954;
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	
+	.logo-titulo {
+		height: 50px;
+	}
+	
+	.datos-tp {
+		color: #B3B3B3;
+		font-size: 1.1rem;
+		margin-bottom: 20px;
+	}
+	/* 4. OVERVIEW STATS (3x2) */
+	
+	.overview-stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		max-width: 1000px;
+		margin: 40px auto;
+		padding: 0 20px;
+	}
+	
+	.stat-item {
+		background-color: #181818;
+		padding: 30px 15px;
+		border-radius: 12px;
+		text-align: center;
+		transition: transform 0.3s ease, background-color 0.3s ease;
+	}
+	
+	.stat-item:hover {
+		transform: translateY(-5px);
+		background-color: #282828;
+	}
+	
+	.stat-number {
+		display: block;
+		color: #1DB954;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+	
+	.stat-label {
+		color: #B3B3B3;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+	/* 5. LAYOUT DE COLUMNAS */
+	
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 40px 20px;
+		display: flex;
+		gap: 40px;
+		align-items: flex-start;
+	}
+	
+	.columna-principal {
+		flex: 1;
+		min-width: 0;
+	}
+	/* LEYENDA DINÁMICA (Solo para los primeros 2 gráficos) */
+	
+	.leyenda-externa {
+		flex: 0 0 180px;
+		position: sticky;
+		top: 100px;
+		background: #181818;
+		padding: 20px;
+		border-radius: 12px;
+		border: 1px solid #282828;
+		opacity: 0;
+		transform: translateX(-20px);
+		transition: all 0.5s ease;
+		pointer-events: none;
+	}
+	
+	.leyenda-visible {
+		opacity: 1;
+		transform: translateX(0);
+		pointer-events: auto;
+	}
+	
+	.item-leyenda {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+		font-size: 0.8rem;
+		color: #B3B3B3;
+		font-weight: 700;
+		transition: 0.3s;
+	}
+	
+	.item-leyenda:hover {
+		color: #FFF;
+		transform: scale(1.05);
+	}
+	
+	.circulo-color {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		display: inline-block;
+		margin-right: 10px;
+	}
+	/* 6. TARJETAS */
+	
+	.tarjeta {
+		background-color: #181818;
+		padding: 30px;
+		border-radius: 10px;
+		margin-bottom: 40px;
+	}
+	
+	.tarjeta h3 {
+		color: #1DB954;
+		margin-top: 0;
+	}
+	
+	.seccion-titulo {
+		font-size: 1.8rem;
+		border-bottom: 1px solid #282828;
+		padding-bottom: 10px;
+		margin-bottom: 30px;
+	}
+	
+	.texto-insight {
+		color: #B3B3B3;
+		font-style: italic;
+		font-size: 0.95rem;
+		border-left: 3px solid #1DB954;
+		padding-left: 10px;
+		margin-top: 20px;
+	}
+	
+	@media (max-width: 900px) {
+		.container {
+			flex-direction: column;
+		}
+		.leyenda-externa {
+			position: static;
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			opacity: 1;
+			transform: none;
+		}
+		.overview-stats {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		h1 {
+			font-size: 2.2rem;
+		}
+	}
+	</style>
+</head>
+
+<body>
+	<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
+	<header class="header-presentacion">
+		<h1><img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo"> Spotify y mis hábitos</h1>
+		<div class="datos-tp">
+			<p><strong>Materia:</strong> Infovis | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
+		</div>
+		<section class="overview-stats">
+			<div class="stat-item"> <span class="stat-number">251.554</span> <span class="stat-label">Minutos Reproducidos</span> </div>
+			<div class="stat-item"> <span class="stat-number">63.878</span> <span class="stat-label">Canciones Escuchadas</span> </div>
+			<div class="stat-item"> <span class="stat-number">4.545</span> <span class="stat-label">Álbumes Escuchados</span> </div>
+			<div class="stat-item"> <span class="stat-number">2.462</span> <span class="stat-label">Artistas distintos</span> </div>
+			<div class="stat-item"> <span class="stat-number">7.407</span> <span class="stat-label">Canciones Únicas</span> </div>
+			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
+		</section>
+	</header>
+	<main class="container">
+		<aside id="leyenda-dinamica" class="leyenda-externa">
+			<h4>Géneros</h4>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #e6e6b3;"></span> Rock Progre</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #d95319;"></span> Heavy Metal</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #bf5b17;"></span> Hard Rock</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #fdb462;"></span> Hip Hop</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #f2d299;"></span> Rock Nacional</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #b3de69;"></span> Soundtracks</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #fccde5;"></span> Podcasts</div>
+		</aside>
+		<div class="columna-principal">
+			<h2 class="seccion-titulo">Análisis Detallado</h2>
+			<div id="seccion-artistas" class="tarjeta">
+				<h3>Top Artistas y Géneros</h3>
+				<p>Distribución de minutos por artista y género.</p>
+				<div style="text-align: center; margin: 20px 0;">
+					<object type="image/svg+xml" data="./Sunburst.svg" style="max-width: 100%; height: auto;"></object>
 				</div>
-				<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha de música. 
-					Especialmente si filtramos por el año 2025, se observa como los lunes y miercoles hay mayor actividad al ser los dias que se trabaja desde casa mientras que los martes y jueves esta disminuye al concurrir a la oficina. 
-					Por su parte el Viernes suele ser corto y desde casa por lo que cae en un punto medio. A su vez, el fin de semana se observa una notoria caida en el uso de la aplicación, dado principalmente por el realizar actividades fuera de casa y al mismo tiempo optar por Youtube al escuchar desde la computadora personal</p>
+				<div style="height: 1px; background: #282828; margin: 40px 0;"></div>
+				<h3>Prevalencia Anual</h3>
+				<div class="flourish-embed flourish-chart" data-src="visualisation/28130928">
+					<script src="https://public.flourish.studio/resources/embed.js"></script>
+				</div>
+			</div>
+			<div class="tarjeta">
+				<h3>Evolución Temporal</h3>
+				<div id="datawrapper-vis-8ey2N" style="min-height:458px; margin-bottom: 40px;">
+					<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/8ey2N/embed.js" charset="utf-8" data-target="#datawrapper-vis-8ey2N"></script>
+				</div>
+				<div id="datawrapper-vis-sNJYF" style="min-height:655px">
+					<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/sNJYF/embed.js" charset="utf-8" data-target="#datawrapper-vis-sNJYF"></script>
+				</div>
+			</div>
+			<div class="tarjeta">
+				<h3>Rituales: Día y Hora</h3>
+				<p>Exploración interactiva de la densidad de escucha.</p>
+				<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
+					<noscript>
+						<a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify3_17743719950620&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
+					</noscript>
+					<object class='tableauViz' style='display:none;'>
+						<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+						<param name='embed_code_version' value='3' />
+						<param name='site_root' value='' />
+						<param name='name' value='Spotify3_17743719950620&#47;Dashboard1' />
+						<param name='tabs' value='no' />
+						<param name='toolbar' value='yes' />
+						<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify3_17743719950620&#47;Dashboard1&#47;1.png' />
+						<param name='animate_transition' value='yes' />
+						<param name='display_static_image' value='yes' />
+						<param name='display_spinner' value='yes' />
+						<param name='display_overlay' value='yes' />
+						<param name='display_count' value='yes' />
+						<param name='language' value='en-US' />
+						<param name='filter' value='publish=yes' />
+						<param name='filter' value='showOnboarding=true' /> </object>
+				</div>
+				<script type='text/javascript'>
+				var divElement = document.getElementById('viz1774372405241');
+				var vizElement = divElement.getElementsByTagName('object')[0];
+				// Ajuste de altura según tu pedido (0.9 para más altura vertical)
+				if(divElement.offsetWidth > 800) {
+					vizElement.style.width = '100%';
+					vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
+				} else if(divElement.offsetWidth > 500) {
+					vizElement.style.width = '100%';
+					vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
+				} else {
+					vizElement.style.width = '100%';
+					vizElement.style.height = '850px';
+				}
+				var scriptElement = document.createElement('script');
+				scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+				vizElement.parentNode.insertBefore(scriptElement, vizElement);
+				</script>
+				<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha. Se observa como los lunes y miércoles hay mayor actividad al trabajar desde casa, mientras que disminuye los martes y jueves en la oficina. </p>
 			</div>
 		</div>
 	</main>
-	<footer>
-		<p>Trabajo Práctico para la materia Infovis - Datos obtenidos vía Spotify Privacy Request.</p>
-	</footer>
+	<footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem;"> Trabajo Práctico Infovis - Datos vía Spotify Privacy Request. </footer>
+	<script>
+	const leyenda = document.getElementById('leyenda-dinamica');
+	const seccionArtistas = document.getElementById('seccion-artistas');
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if(entry.isIntersecting) {
+				leyenda.classList.add('leyenda-visible');
+			} else {
+				leyenda.classList.remove('leyenda-visible');
+			}
+		});
+	}, {
+		threshold: 0.1
+	});
+	observer.observe(seccionArtistas);
+	</script>
 </body>
 
 </html>
