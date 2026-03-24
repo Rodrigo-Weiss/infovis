@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -6,112 +7,45 @@
 	<title>TP Spotify Data - Rodrigo Weiss</title>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 	<style>
-	/* 1. CONFIGURACIÓN GENERAL Y MODO OSCURO */
-	
-	:root {
-		color-scheme: dark;
-	}
-	
-	iframe,
-	object,
-	.tableauPlaceholder {
-		background-color: #121212 !important;
-	}
-	
+	/* 1. CONFIGURACIÓN GENERAL */
+	:root { color-scheme: dark; }
+	iframe, object, .tableauPlaceholder { background-color: #121212 !important; }
 	body {
 		background-color: #121212 !important;
 		color: #FFFFFF !important;
 		font-family: 'Montserrat', sans-serif;
-		margin: 0;
-		padding: 0;
-		line-height: 1.6;
+		margin: 0; padding: 0; line-height: 1.6;
 	}
+
 	/* 2. LOGO FIJO */
-	
 	.fixed-logo-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 60px;
+		position: fixed; top: 0; left: 0; width: 100%; height: 60px;
 		background-color: rgba(18, 18, 18, 0.95);
-		display: flex;
-		align-items: center;
-		padding-left: 20px;
-		z-index: 1000;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+		display: flex; align-items: center; padding-left: 20px;
+		z-index: 1000; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 	}
-	
-	.fixed-logo-container img {
-		height: 35px;
-		width: auto;
-	}
+	.fixed-logo-container img { height: 35px; width: auto; }
+
 	/* 3. ENCABEZADO */
-	
 	.header-presentacion {
-		text-align: center;
-		padding: 120px 20px 40px 20px;
+		text-align: center; padding: 120px 20px 40px 20px;
 		background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
 	}
-	
-	h1 {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 15px;
-		color: #1DB954;
-		font-size: 3rem;
-		font-weight: 700;
-		margin-bottom: 10px;
-	}
-	
-	.logo-titulo {
-		height: 50px;
-	}
-	
-	.datos-tp {
-		color: #B3B3B3;
-		font-size: 1.1rem;
-		margin-bottom: 20px;
-	}
-	/* 4. OVERVIEW STATS (3x2) */
-	
+	h1 { display: flex; align-items: center; justify-content: center; gap: 15px; color: #1DB954; font-size: 3rem; font-weight: 700; margin-bottom: 10px; }
+	.logo-titulo { height: 50px; }
+	.datos-tp { color: #B3B3B3; font-size: 1.1rem; margin-bottom: 20px; }
+
+	/* 4. OVERVIEW STATS */
 	.overview-stats {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
-		max-width: 1000px;
-		margin: 40px auto;
-		padding: 0 20px;
+		display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+		max-width: 1000px; margin: 40px auto; padding: 0 20px;
 	}
-	
-	.stat-item {
-		background-color: #181818;
-		padding: 30px 15px;
-		border-radius: 12px;
-		text-align: center;
-		transition: transform 0.3s ease, background-color 0.3s ease;
-	}
-	
-	.stat-item:hover {
-		transform: translateY(-5px);
-		background-color: #282828;
-	}
-	
-	.stat-number {
-		display: block;
-		color: #1DB954;
-		font-size: 2.2rem;
-		font-weight: 700;
-	}
-	
-	.stat-label {
-		color: #B3B3B3;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-	}
+	.stat-item { background-color: #181818; padding: 30px 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
+	.stat-item:hover { transform: translateY(-5px); background-color: #282828; }
+	.stat-number { display: block; color: #1DB954; font-size: 2.2rem; font-weight: 700; }
+	.stat-label { color: #B3B3B3; font-size: 0.8rem; text-transform: uppercase; }
+
 	/* 5. LAYOUT DE COLUMNAS */
-	
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -119,14 +53,12 @@
 		display: flex;
 		gap: 40px;
 		align-items: flex-start;
+		position: relative; /* Importante para el reproductor */
 	}
-	
-	.columna-principal {
-		flex: 1;
-		min-width: 0;
-	}
-	/* LEYENDA DINÁMICA (Solo para los primeros 2 gráficos) */
-	
+
+	.columna-principal { flex: 1; min-width: 0; }
+
+	/* LEYENDA DINÁMICA (IZQUIERDA) */
 	.leyenda-externa {
 		flex: 0 0 180px;
 		position: sticky;
@@ -140,96 +72,33 @@
 		transition: all 0.5s ease;
 		pointer-events: none;
 	}
-	
-	.leyenda-visible {
-		opacity: 1;
-		transform: translateX(0);
-		pointer-events: auto;
+	.leyenda-visible { opacity: 1; transform: translateX(0); pointer-events: auto; }
+	.item-leyenda { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.8rem; color: #B3B3B3; font-weight: 700; }
+	.circulo-color { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 10px; }
+
+	/* REPRODUCTOR FIJO (DERECHA) */
+	.reproductor-derecha {
+		flex: 0 0 280px;
+		position: sticky;
+		top: 100px;
 	}
-	
-	.item-leyenda {
-		display: flex;
-		align-items: center;
-		margin-bottom: 12px;
-		font-size: 0.8rem;
-		color: #B3B3B3;
-		font-weight: 700;
-		transition: 0.3s;
-	}
-	
-	.item-leyenda:hover {
-		color: #FFF;
-		transform: scale(1.05);
-	}
-	/* Para asegurar que el reproductor sea legible en la columna derecha */
-	
-	.reproductor-lateral {
-		margin-top: 20px;
-		transition: opacity 0.5s ease;
-		/* Para que aparezca junto con la leyenda */
-	}
-	
-	.circulo-color {
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
-		display: inline-block;
-		margin-right: 10px;
-	}
+
 	/* 6. TARJETAS */
-	
-	.tarjeta {
-		background-color: #181818;
-		padding: 30px;
-		border-radius: 10px;
-		margin-bottom: 40px;
-	}
-	
-	.tarjeta h3 {
-		color: #1DB954;
-		margin-top: 0;
-	}
-	
-	.seccion-titulo {
-		font-size: 1.8rem;
-		border-bottom: 1px solid #282828;
-		padding-bottom: 10px;
-		margin-bottom: 30px;
-	}
-	
-	.texto-insight {
-		color: #B3B3B3;
-		font-style: italic;
-		font-size: 0.95rem;
-		border-left: 3px solid #1DB954;
-		padding-left: 10px;
-		margin-top: 20px;
-	}
-	
-	@media (max-width: 900px) {
-		.container {
-			flex-direction: column;
-		}
-		.leyenda-externa {
-			position: static;
-			width: 100%;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			opacity: 1;
-			transform: none;
-		}
-		.overview-stats {
-			grid-template-columns: repeat(2, 1fr);
-		}
-		h1 {
-			font-size: 2.2rem;
-		}
+	.tarjeta { background-color: #181818; padding: 30px; border-radius: 10px; margin-bottom: 40px; }
+	.tarjeta h3 { color: #1DB954; margin-top: 0; }
+	.seccion-titulo { font-size: 1.8rem; border-bottom: 1px solid #282828; padding-bottom: 10px; margin-bottom: 30px; }
+	.texto-insight { color: #B3B3B3; font-style: italic; font-size: 0.95rem; border-left: 3px solid #1DB954; padding-left: 10px; margin-top: 20px; }
+
+	@media (max-width: 1100px) {
+		.container { flex-direction: column; align-items: center; }
+		.leyenda-externa, .reproductor-derecha { position: static; width: 100%; opacity: 1; transform: none; }
 	}
 	</style>
 </head>
 
 <body>
 	<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
+	
 	<header class="header-presentacion">
 		<h1><img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo"> Spotify y mis hábitos</h1>
 		<div class="datos-tp">
@@ -244,13 +113,12 @@
 			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
 		</section>
 	</header>
+
 	<div style="height: 1px; background: #282828; margin: 20px 0;"></div>
-	<div class="reproductor-lateral">
-		<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/17lu4tymfnhmcIDlzBbtAb?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-	</div>
+
 	<main class="container">
 		<aside id="leyenda-dinamica" class="leyenda-externa">
-			<h4>Géneros</h4>
+			<h4 style="margin-top:0">Géneros</h4>
 			<div class="item-leyenda"><span class="circulo-color" style="background-color: #EBEBB3;"></span> Rock Progresivo</div>
 			<div class="item-leyenda"><span class="circulo-color" style="background-color: #D45113;"></span> Heavy Metal</div>
 			<div class="item-leyenda"><span class="circulo-color" style="background-color: #AB430C;"></span> Hard Rock</div>
@@ -259,12 +127,14 @@
 			<div class="item-leyenda"><span class="circulo-color" style="background-color: #DDF9C1;"></span> Soundtracks</div>
 			<div class="item-leyenda"><span class="circulo-color" style="background-color: #F9A03F;"></span> Podcasts</div>
 		</aside>
+
 		<div class="columna-principal">
 			<h2 class="seccion-titulo">Análisis Detallado</h2>
+			
 			<div id="seccion-artistas" class="tarjeta">
 				<h3>Top Artistas y Géneros</h3>
 				<p>Distribución de minutos por artista y género.</p>
-				<div style="text-align: center; margin: 20px 0;">
+				<div style="text-align: center; margin: 20px 0; min-height: 600px;">
 					<object type="image/svg+xml" data="./Sunburst.svg" style="max-width: 100%; height: auto;"></object>
 				</div>
 				<div style="height: 1px; background: #282828; margin: 40px 0;"></div>
@@ -274,6 +144,7 @@
 					<script src="https://public.flourish.studio/resources/embed.js"></script>
 				</div>
 			</div>
+
 			<div class="tarjeta">
 				<h3>Evolución Temporal</h3>
 				<div id="datawrapper-vis-8ey2N" style="min-height:458px; margin-bottom: 40px;">
@@ -284,67 +155,67 @@
 					<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/sNJYF/embed.js" charset="utf-8" data-target="#datawrapper-vis-sNJYF"></script>
 				</div>
 			</div>
+
 			<div class="tarjeta">
 				<h3>Rituales: Día y Hora</h3>
-				<p>Exploración interactiva de la densidad de escucha.</p>
 				<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
-					<noscript>
-						<a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify3_17743719950620&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
-					</noscript>
 					<object class='tableauViz' style='display:none;'>
+						<param name='name' value='Spotify3_17743719950620/Dashboard1' />
 						<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
 						<param name='embed_code_version' value='3' />
-						<param name='site_root' value='' />
-						<param name='name' value='Spotify3_17743719950620&#47;Dashboard1' />
-						<param name='tabs' value='no' />
 						<param name='toolbar' value='yes' />
-						<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify3_17743719950620&#47;Dashboard1&#47;1.png' />
 						<param name='animate_transition' value='yes' />
-						<param name='display_static_image' value='yes' />
-						<param name='display_spinner' value='yes' />
-						<param name='display_overlay' value='yes' />
-						<param name='display_count' value='yes' />
-						<param name='language' value='en-US' />
-						<param name='filter' value='publish=yes' />
-						<param name='filter' value='showOnboarding=true' /> </object>
+					</object>
 				</div>
 				<script type='text/javascript'>
-				var divElement = document.getElementById('viz1774372405241');
-				var vizElement = divElement.getElementsByTagName('object')[0];
-				// Ajuste de altura según tu pedido (0.9 para más altura vertical)
-				if(divElement.offsetWidth > 800) {
+					var divElement = document.getElementById('viz1774372405241');
+					var vizElement = divElement.getElementsByTagName('object')[0];
 					vizElement.style.width = '100%';
 					vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
-				} else if(divElement.offsetWidth > 500) {
-					vizElement.style.width = '100%';
-					vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
-				} else {
-					vizElement.style.width = '100%';
-					vizElement.style.height = '850px';
-				}
-				var scriptElement = document.createElement('script');
-				scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-				vizElement.parentNode.insertBefore(scriptElement, vizElement);
+					var scriptElement = document.createElement('script');
+					scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+					vizElement.parentNode.insertBefore(scriptElement, vizElement);
 				</script>
-				<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha. Se observa como los lunes y miércoles hay mayor actividad al trabajar desde casa, mientras que disminuye los martes y jueves en la oficina. </p>
+				<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha. </p>
 			</div>
 		</div>
+<aside class="reproductor-derecha">
+    <div class="tarjeta" style="padding: 15px; border: 1px solid #282828; text-align: center;">
+               
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/5c/ForThoseAboutToRock_ACDCalbum.jpg" 
+             alt="AC/DC Album Cover" 
+             style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        
+        <p style="font-size: 0.85rem; color: #FFFFFF; margin-bottom: 12px; font-weight: 700; line-height: 1.2; text-align: left;">
+            For Those About to Rock (We Salute You) - AC/DC
+        </p>
+        
+        <iframe 
+            src="https://drive.google.com/file/d/1A5iohwj9D3gS_rKbEPmRCkQlwMUse3Ul/preview" 
+            width="100%" 
+            height="60" 
+            frameborder="0" 
+            style="border-radius: 8px; filter: invert(0.9) hue-rotate(180deg);" 
+            allow="autoplay">
+        </iframe>
+    </div>
+</aside>
 	</main>
-	<footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem;"> Trabajo Práctico Infovis - Datos vía Spotify Privacy Request. </footer>
+
+	<footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem;"> 
+		Trabajo Práctico Infovis - Datos vía Spotify Privacy Request. 
+	</footer>
+
 	<script>
-	const leyenda = document.getElementById('leyenda-dinamica');
-	const seccionArtistas = document.getElementById('seccion-artistas');
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if(entry.isIntersecting) {
-				leyenda.classList.add('leyenda-visible');
-			} else {
-				leyenda.classList.remove('leyenda-visible');
-			}
-		});
-	}, {
-		threshold: 0.1
-	});
-	observer.observe(seccionArtistas);
+		const leyenda = document.getElementById('leyenda-dinamica');
+		const seccionArtistas = document.getElementById('seccion-artistas');
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if(entry.isIntersecting) leyenda.classList.add('leyenda-visible');
+				else leyenda.classList.remove('leyenda-visible');
+			});
+		}, { threshold: 0.1 });
+		observer.observe(seccionArtistas);
 	</script>
 </body>
+</html>
