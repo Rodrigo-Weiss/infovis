@@ -162,7 +162,12 @@
 		color: #FFF;
 		transform: scale(1.05);
 	}
-	
+	/* Para asegurar que el reproductor sea legible en la columna derecha */
+.reproductor-lateral {
+    margin-top: 20px;
+    background: #181818;
+    border-radius: 12px;
+}
 	.circulo-color {
 		width: 12px;
 		height: 12px;
@@ -238,6 +243,20 @@
 			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
 		</section>
 	</header>
+  <div style="height: 1px; background: #282828; margin: 20px 0;"></div>
+
+<div class="reproductor-lateral">
+    <p style="font-size: 0.7rem; color: #1DB954; text-transform: uppercase; margin-bottom: 10px; font-weight: 700;">Reproduciendo ahora</p>
+    <iframe style="border-radius:12px" 
+        src="https://open.spotify.com/embed/track/5XmS96hl9BTD9r6yJl3p3r?utm_source=generator&theme=0" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+    </iframe>
+</div>
 	<main class="container">
 		<aside id="leyenda-dinamica" class="leyenda-externa">
 			<h4>Géneros</h4>
@@ -335,4 +354,5 @@
 	});
 	observer.observe(seccionArtistas);
 	</script>
+  
 </body>
