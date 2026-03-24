@@ -134,29 +134,31 @@
 		<div class="columna-principal">
 			<h2 class="seccion-titulo">Análisis Detallado</h2>
 			
-	<div id="seccion-artistas" class="tarjeta" style="padding: 30px; background-color: #181818;">
+<div id="seccion-artistas" class="tarjeta" style="padding: 30px; background-color: #181818; overflow: hidden;">
     <h3>Top Artistas y Géneros</h3>
     <p>Distribución de minutos por artista y género.</p>
     
     <div style="
         width: 100%;
-        /* El secreto es no poner un height fijo, sino dejar que el contenido respire */
+        height: 500px; /* Ajustamos la altura de la 'ventana' */
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 20px 0;
-        padding: 10px; /* Este pequeño padding evita que el borde del círculo toque el borde de la tarjeta */
+        position: relative;
+        margin-top: 20px;
     ">
         <object 
             type="image/svg+xml" 
             data="./Sunburst.svg" 
             style="
-                width: 100%;
-                max-width: 650px; /* Ajusta este tamaño para que no se vea gigante */
-                height: auto;
-                display: block;
-                /* El navegador se encarga de que no se corte nada */
-                object-fit: contain; 
+                width: 100%; /* Lo agrandamos un poco para que llene la ventana */
+                height: 100%;
+                object-fit: contain;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); /* Lo centramos matemáticamente */
             ">
         </object>
     </div>
