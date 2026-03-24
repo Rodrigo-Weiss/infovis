@@ -1,499 +1,351 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
-
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TP Spotify Data - Rodrigo Weiss</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-
-/* 1. CONFIGURACIÓN GENERAL */
-
-:root { color-scheme: dark; }
-
-iframe, object, .tableauPlaceholder { background-color: #121212 !important; }
-
-body {
-
-background-color: #121212 !important;
-
-color: #FFFFFF !important;
-
-font-family: 'Montserrat', sans-serif;
-
-margin: 0; padding: 0; line-height: 1.6;
-
-}
-
-
-
-/* 2. LOGO FIJO */
-
-.fixed-logo-container {
-
-position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-
-background-color: rgba(18, 18, 18, 0.95);
-
-display: flex; align-items: center; padding-left: 20px;
-
-z-index: 1000; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-
-}
-
-.fixed-logo-container img { height: 35px; width: auto; }
-
-
-
-/* 3. ENCABEZADO */
-
-.header-presentacion {
-
-text-align: center; padding: 120px 20px 40px 20px;
-
-background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
-
-}
-
-h1 { display: flex; align-items: center; justify-content: center; gap: 15px; color: #1DB954; font-size: 3rem; font-weight: 700; margin-bottom: 10px; }
-
-.logo-titulo { height: 50px; }
-
-.datos-tp { color: #B3B3B3; font-size: 1.1rem; margin-bottom: 20px; }
-
-
-
-/* 4. OVERVIEW STATS */
-
-.overview-stats {
-
-display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-
-max-width: 1100px; margin: 40px auto; padding: 0 20px;
-
-}
-
-.stat-item { background-color: #181818; padding: 30px 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
-
-.stat-item:hover { transform: translateY(-5px); background-color: #282828; }
-
-.stat-number { display: block; color: #1DB954; font-size: 2.2rem; font-weight: 700; }
-
-.stat-label { color: #B3B3B3; font-size: 0.8rem; text-transform: uppercase; }
-
-
-
-/* 5. LAYOUT DE COLUMNAS (LIMITADO Y CENTRADO) */
-
-.container {
-
-max-width: 1400px; /* Límite total de expansión de la página */
-
-margin: 0 auto;
-
-padding: 40px 20px;
-
-display: flex;
-
-gap: 30px;
-
-align-items: flex-start;
-
-justify-content: center; /* Centra el contenido si la pantalla es muy ancha */
-
-}
-
-
-
-.columna-principal { 
-
-flex: 1; 
-
-max-width: 900px; /* LÍMITE DE LAS TARJETAS: Para que no se estiren de más */
-
-min-width: 0; 
-
-}
-
-
-
-/* LEYENDA DINÁMICA (IZQUIERDA) */
-
-.leyenda-externa {
-
-flex: 0 0 180px;
-
-position: sticky;
-
-top: 100px;
-
-background: #181818;
-
-padding: 20px;
-
-border-radius: 12px;
-
-border: 1px solid #282828;
-
-opacity: 0;
-
-transform: translateX(-20px);
-
-transition: all 0.5s ease;
-
-}
-
-.leyenda-visible { opacity: 1; transform: translateX(0); }
-
-.item-leyenda { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.8rem; color: #B3B3B3; font-weight: 700; }
-
-.circulo-color { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 10px; }
-
-
-
-/* REPRODUCTOR FIJO (DERECHA) */
-
-.reproductor-derecha {
-
-flex: 0 0 260px; /* Ancho un poco más compacto */
-
-position: sticky;
-
-top: 100px;
-
-}
-
-
-
-/* 6. TARJETAS */
-
-.tarjeta { background-color: #181818; padding: 30px; border-radius: 10px; margin-bottom: 40px; }
-
-.tarjeta h3 { color: #1DB954; margin-top: 0; }
-
-.seccion-titulo { font-size: 1.8rem; border-bottom: 1px solid #282828; padding-bottom: 10px; margin-bottom: 30px; }
-
-.texto-insight { color: #B3B3B3; font-style: italic; font-size: 0.95rem; border-left: 3px solid #1DB954; padding-left: 10px; margin-top: 20px; }
-
-
-
-@media (max-width: 1200px) {
-
-.container { flex-direction: column; align-items: center; }
-
-.leyenda-externa, .reproductor-derecha { position: static; width: 100%; opacity: 1; transform: none; max-width: 900px; }
-
-}
-
-</style>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TP Spotify Data - Rodrigo Weiss</title>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+	/* 1. CONFIGURACIÓN GENERAL */
+	
+	:root {
+		color-scheme: dark;
+	}
+	
+	iframe,
+	object,
+	.tableauPlaceholder {
+		background-color: #121212 !important;
+	}
+	
+	body {
+		background-color: #121212 !important;
+		color: #FFFFFF !important;
+		font-family: 'Montserrat', sans-serif;
+		margin: 0;
+		padding: 0;
+		line-height: 1.6;
+	}
+	/* 2. LOGO FIJO */
+	
+	.fixed-logo-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		background-color: rgba(18, 18, 18, 0.95);
+		display: flex;
+		align-items: center;
+		padding-left: 20px;
+		z-index: 1000;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	}
+	
+	.fixed-logo-container img {
+		height: 35px;
+		width: auto;
+	}
+	/* 3. ENCABEZADO */
+	
+	.header-presentacion {
+		text-align: center;
+		padding: 120px 20px 40px 20px;
+		background: linear-gradient(rgba(29, 185, 84, 0.1), transparent);
+	}
+	
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 15px;
+		color: #1DB954;
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	
+	.logo-titulo {
+		height: 50px;
+	}
+	
+	.datos-tp {
+		color: #B3B3B3;
+		font-size: 1.1rem;
+		margin-bottom: 20px;
+	}
+	/* 4. OVERVIEW STATS */
+	
+	.overview-stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		max-width: 1100px;
+		margin: 40px auto;
+		padding: 0 20px;
+	}
+	
+	.stat-item {
+		background-color: #181818;
+		padding: 30px 15px;
+		border-radius: 12px;
+		text-align: center;
+		transition: 0.3s;
+	}
+	
+	.stat-item:hover {
+		transform: translateY(-5px);
+		background-color: #282828;
+	}
+	
+	.stat-number {
+		display: block;
+		color: #1DB954;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+	
+	.stat-label {
+		color: #B3B3B3;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+	/* 5. LAYOUT DE COLUMNAS (LIMITADO Y CENTRADO) */
+	
+	.container {
+		max-width: 1400px;
+		/* Límite total de expansión de la página */
+		margin: 0 auto;
+		padding: 40px 20px;
+		display: flex;
+		gap: 30px;
+		align-items: flex-start;
+		justify-content: center;
+		/* Centra el contenido si la pantalla es muy ancha */
+	}
+	
+	.columna-principal {
+		flex: 1;
+		max-width: 820px;
+		/* LÍMITE DE LAS TARJETAS: Para que no se estiren de más */
+		min-width: 0;
+	}
+	/* LEYENDA DINÁMICA (IZQUIERDA) */
+	
+	.leyenda-externa {
+		flex: 0 0 180px;
+		position: sticky;
+		top: 100px;
+		background: #181818;
+		padding: 20px;
+		border-radius: 12px;
+		border: 1px solid #282828;
+		opacity: 0;
+		transform: translateX(-20px);
+		transition: all 0.5s ease;
+	}
+	
+	.leyenda-visible {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	
+	.item-leyenda {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+		font-size: 0.8rem;
+		color: #B3B3B3;
+		font-weight: 700;
+	}
+	
+	.circulo-color {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		display: inline-block;
+		margin-right: 10px;
+	}
+	/* REPRODUCTOR FIJO (DERECHA) */
+	
+	.reproductor-derecha {
+		flex: 0 0 260px;
+		/* Ancho un poco más compacto */
+		position: sticky;
+		top: 100px;
+	}
+	/* 6. TARJETAS */
+	
+	.tarjeta {
+		background-color: #181818;
+		padding: 30px;
+		border-radius: 10px;
+		margin-bottom: 40px;
+	}
+	
+	.tarjeta h3 {
+		color: #1DB954;
+		margin-top: 0;
+	}
+	
+	.seccion-titulo {
+		font-size: 1.8rem;
+		border-bottom: 1px solid #282828;
+		padding-bottom: 10px;
+		margin-bottom: 30px;
+	}
+	
+	.texto-insight {
+		color: #B3B3B3;
+		font-style: italic;
+		font-size: 0.95rem;
+		border-left: 3px solid #1DB954;
+		padding-left: 10px;
+		margin-top: 20px;
+	}
+	
+	@media (max-width: 1200px) {
+		.container {
+			flex-direction: column;
+			align-items: center;
+		}
+		.leyenda-externa,
+		.reproductor-derecha {
+			position: static;
+			width: 100%;
+			opacity: 1;
+			transform: none;
+			max-width: 900px;
+		}
+	}
+	</style>
 </head>
 
-
-
 <body>
-
-<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
-
-
-<header class="header-presentacion">
-
-<h1><img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo"> Spotify y mis hábitos</h1>
-
-<div class="datos-tp">
-
-<p><strong>Materia:</strong> Infovis | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
-
-</div>
-
-<section class="overview-stats">
-
-<div class="stat-item"> <span class="stat-number">251.554</span> <span class="stat-label">Minutos Reproducidos</span> </div>
-
-<div class="stat-item"> <span class="stat-number">63.878</span> <span class="stat-label">Canciones Escuchadas</span> </div>
-
-<div class="stat-item"> <span class="stat-number">4.545</span> <span class="stat-label">Álbumes Escuchados</span> </div>
-
-<div class="stat-item"> <span class="stat-number">2.462</span> <span class="stat-label">Artistas distintos</span> </div>
-
-<div class="stat-item"> <span class="stat-number">7.407</span> <span class="stat-label">Canciones Únicas</span> </div>
-
-<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
-
-</section>
-
-</header>
-
-
-
-<div style="height: 1px; background: #282828; margin: 20px 0;"></div>
-
-
-
-<main class="container">
-
-<aside id="leyenda-dinamica" class="leyenda-externa">
-
-<h4 style="margin-top:0">Géneros</h4>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #EBEBB3;"></span> Rock Progresivo</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #D45113;"></span> Heavy Metal</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #AB430C;"></span> Hard Rock</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #E77929;"></span> Hip Hop</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #F8DDA4;"></span> Rock Nacional</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #DDF9C1;"></span> Soundtracks</div>
-
-<div class="item-leyenda"><span class="circulo-color" style="background-color: #F9A03F;"></span> Podcasts</div>
-
-</aside>
-
-
-
-<div class="columna-principal">
-
-<h2 class="seccion-titulo">Análisis Detallado</h2>
-
-
-<div id="seccion-artistas" class="tarjeta" style="padding: 30px; background-color: #181818; overflow: hidden;">
-
+	<div class="fixed-logo-container"> <img src="Spotify_Full_Logo_RGB_Green.png" alt="Spotify Logo"> </div>
+	<header class="header-presentacion">
+		<h1><img src="Spotify_Primary_Logo_RGB_Green.png" alt="Logo" class="logo-titulo"> Spotify y mis hábitos</h1>
+		<div class="datos-tp">
+			<p><strong>Materia:</strong> Infovis | <strong>Alumno:</strong> Rodrigo Weiss | <strong>Año:</strong> 2026</p>
+		</div>
+		<section class="overview-stats">
+			<div class="stat-item"> <span class="stat-number">251.554</span> <span class="stat-label">Minutos Reproducidos</span> </div>
+			<div class="stat-item"> <span class="stat-number">63.878</span> <span class="stat-label">Canciones Escuchadas</span> </div>
+			<div class="stat-item"> <span class="stat-number">4.545</span> <span class="stat-label">Álbumes Escuchados</span> </div>
+			<div class="stat-item"> <span class="stat-number">2.462</span> <span class="stat-label">Artistas distintos</span> </div>
+			<div class="stat-item"> <span class="stat-number">7.407</span> <span class="stat-label">Canciones Únicas</span> </div>
+			<div class="stat-item"> <span class="stat-number">108</span> <span class="stat-label">Minutos por día (Promedio)</span> </div>
+		</section>
+	</header>
+	<div style="height: 1px; background: #282828; margin: 20px 0;"></div>
+	<main class="container">
+		<aside id="leyenda-dinamica" class="leyenda-externa">
+			<h4 style="margin-top:0">Géneros</h4>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #EBEBB3;"></span> Rock Progresivo</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #D45113;"></span> Heavy Metal</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #AB430C;"></span> Hard Rock</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #E77929;"></span> Hip Hop</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #F8DDA4;"></span> Rock Nacional</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #DDF9C1;"></span> Soundtracks</div>
+			<div class="item-leyenda"><span class="circulo-color" style="background-color: #F9A03F;"></span> Podcasts</div>
+		</aside>
+		<div class="columna-principal">
+			<h2 class="seccion-titulo">Análisis Detallado</h2>
+			<div id="seccion-artistas" class="tarjeta" ...>
     <h3>Top Artistas y Géneros</h3>
-
     <p>Distribución de minutos por artista y género.</p>
-
     
-
     <div style="
-
         width: 100%;
-
-        height: 500px; /* Ajustamos la altura de la 'ventana' */
-
+        height: 500px;
         overflow: hidden;
-
         display: flex;
-
         justify-content: center;
-
         align-items: center;
-
         position: relative;
-
         margin-top: 20px;
-
+        /* --- AGREGAMOS ESTO --- */
+        padding: 0 40px; /* Esto empuja el contenido hacia adentro desde los costados */
+        box-sizing: border-box; /* Asegura que el padding no agrande el contenedor */
     ">
-
         <object 
-
             type="image/svg+xml" 
-
             data="./Sunburst.svg" 
-
             style="
-
-                width: 120%; /* Lo agrandamos un poco para que llene la ventana */
-
-                height: 120%;
-
+                width: 100%; /* Bajamos de 120% a 100% para que respete el padding */
+                height: 100%;
                 object-fit: contain;
-
                 position: absolute;
-
                 top: 50%;
-
                 left: 50%;
-
-                transform: translate(-50%, -50%) scale(0.85); /* Lo centramos matemáticamente */
-
+                transform: translate(-50%, -50%) scale(0.9); /* Ajustamos el scale */
             ">
-
         </object>
-
     </div>
-
-    
-
-    <div style="height: 1px; background: #282828; margin: 40px 0;"></div>
-
-    
-
-    <h3>Prevalencia Anual</h3>
-
-    <div class="flourish-embed flourish-chart" data-src="visualisation/28130928">
-
-        <script src="https://public.flourish.studio/resources/embed.js"></script>
-
-    </div>
-
+    ...
 </div>
-
-
-
-<div class="tarjeta">
-
-<h3>Evolución Temporal</h3>
-
-<div id="datawrapper-vis-8ey2N" style="min-height:458px; margin-bottom: 40px;">
-
-<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/8ey2N/embed.js" charset="utf-8" data-target="#datawrapper-vis-8ey2N"></script>
-
-</div>
-
-<div style="height: 1px; background: #282828; margin: 40px 0;"></div>
-
-<div id="datawrapper-vis-sNJYF" style="min-height:655px">
-
-<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/sNJYF/embed.js" charset="utf-8" data-target="#datawrapper-vis-sNJYF"></script>
-
-</div>
-
-</div>
-
-
-
-<div class="tarjeta">
-
-<h3>Rituales: Día y Hora</h3>
-
-<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
-
-<object class='tableauViz' style='display:none;'>
-
-<param name='name' value='Spotify3_17743719950620/Dashboard1' />
-
-<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-
-<param name='embed_code_version' value='3' />
-
-<param name='toolbar' value='yes' />
-
-<param name='animate_transition' value='yes' />
-
-</object>
-
-</div>
-
-<script type='text/javascript'>
-
-var divElement = document.getElementById('viz1774372405241');
-
-var vizElement = divElement.getElementsByTagName('object')[0];
-
-vizElement.style.width = '100%';
-
-vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
-
-var scriptElement = document.createElement('script');
-
-scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-
-vizElement.parentNode.insertBefore(scriptElement, vizElement);
-
-</script>
-
-<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha. </p>
-
-</div>
-
-</div>
-
-
-
-<aside class="reproductor-derecha">
-
-<div class="tarjeta" style="padding: 12px; border: 1px solid #282828; background: #181818;">
-
-<h4 style="color: #1DB954; margin: 0 0 15px 0; font-size: 0.9rem; letter-spacing: 1px; text-align: center;">
+			</div>
+			<div class="tarjeta">
+				<h3>Evolución Temporal</h3>
+				<div id="datawrapper-vis-8ey2N" style="min-height:458px; margin-bottom: 40px;">
+					<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/8ey2N/embed.js" charset="utf-8" data-target="#datawrapper-vis-8ey2N"></script>
+				</div>
+				<div style="height: 1px; background: #282828; margin: 40px 0;"></div>
+				<div id="datawrapper-vis-sNJYF" style="min-height:655px">
+					<script type="text/javascript" defer src="https://datawrapper.dwcdn.net/sNJYF/embed.js" charset="utf-8" data-target="#datawrapper-vis-sNJYF"></script>
+				</div>
+			</div>
+			<div class="tarjeta">
+				<h3>Rituales: Día y Hora</h3>
+				<div class='tableauPlaceholder' id='viz1774372405241' style='position: relative'>
+					<object class='tableauViz' style='display:none;'>
+						<param name='name' value='Spotify3_17743719950620/Dashboard1' />
+						<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+						<param name='embed_code_version' value='3' />
+						<param name='toolbar' value='yes' />
+						<param name='animate_transition' value='yes' /> </object>
+				</div>
+				<script type='text/javascript'>
+				var divElement = document.getElementById('viz1774372405241');
+				var vizElement = divElement.getElementsByTagName('object')[0];
+				vizElement.style.width = '100%';
+				vizElement.style.height = (divElement.offsetWidth * 0.9) + 'px';
+				var scriptElement = document.createElement('script');
+				scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+				vizElement.parentNode.insertBefore(scriptElement, vizElement);
+				</script>
+				<p class="texto-insight"> El mapa de calor permite identificar visualmente los momentos de mayor intensidad en la escucha. </p>
+			</div>
+		</div>
+		<aside class="reproductor-derecha">
+			<div class="tarjeta" style="padding: 12px; border: 1px solid #282828; background: #181818;">
+				<h4 style="color: #1DB954; margin: 0 0 15px 0; font-size: 0.9rem; letter-spacing: 1px; text-align: center;">
 
             Un poco de musica para ambientar
 
-        </h4>
-
-              <img src="https://upload.wikimedia.org/wikipedia/en/5/5c/ForThoseAboutToRock_ACDCalbum.jpg" 
-
-alt="AC/DC Cover" 
-
-style="width: 100%; border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
-
-
-<p style="font-size: 0.75rem; color: #FFFFFF; margin-bottom: 10px; font-weight: 700; line-height: 1.2;">
-
-For Those About to Rock - AC/DC
-
-</p>
-
-
-<div style="width: 100%; height: 48px; overflow: hidden; border-radius: 6px; background: #282828;">
-
-<iframe 
-
-src="https://drive.google.com/file/d/1A5iohwj9D3gS_rKbEPmRCkQlwMUse3Ul/preview" 
-
-width="100%" 
-
-height="100" 
-
-frameborder="0" 
-
-style="margin-top: -26px; filter: invert(0.9) hue-rotate(180deg);" 
-
-allow="autoplay">
-
-</iframe>
-
-</div>
-
-</div>
-
-</aside>
-
-</main>
-
-
-
-<footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem;"> 
-
-Trabajo Práctico Infovis - Datos vía Spotify Privacy Request. 
-
-</footer>
-
-
-
-<script>
-
-const leyenda = document.getElementById('leyenda-dinamica');
-
-const seccionArtistas = document.getElementById('seccion-artistas');
-
-const observer = new IntersectionObserver((entries) => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting) leyenda.classList.add('leyenda-visible');
-
-else leyenda.classList.remove('leyenda-visible');
-
-});
-
-}, { threshold: 0.1 });
-
-observer.observe(seccionArtistas);
-
-</script>
-
+        </h4> <img src="https://upload.wikimedia.org/wikipedia/en/5/5c/ForThoseAboutToRock_ACDCalbum.jpg" alt="AC/DC Cover" style="width: 100%; border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+				<p style="font-size: 0.75rem; color: #FFFFFF; margin-bottom: 10px; font-weight: 700; line-height: 1.2;"> For Those About to Rock - AC/DC </p>
+				<div style="width: 100%; height: 48px; overflow: hidden; border-radius: 6px; background: #282828;">
+					<iframe src="https://drive.google.com/file/d/1A5iohwj9D3gS_rKbEPmRCkQlwMUse3Ul/preview" width="100%" height="100" frameborder="0" style="margin-top: -26px; filter: invert(0.9) hue-rotate(180deg);" allow="autoplay"> </iframe>
+				</div>
+			</div>
+		</aside>
+	</main>
+	<footer style="text-align: center; padding: 60px; color: #555; font-size: 0.8rem;"> Trabajo Práctico Infovis - Datos vía Spotify Privacy Request. </footer>
+	<script>
+	const leyenda = document.getElementById('leyenda-dinamica');
+	const seccionArtistas = document.getElementById('seccion-artistas');
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if(entry.isIntersecting) leyenda.classList.add('leyenda-visible');
+			else leyenda.classList.remove('leyenda-visible');
+		});
+	}, {
+		threshold: 0.1
+	});
+	observer.observe(seccionArtistas);
+	</script>
 </body>
 
 </html>
