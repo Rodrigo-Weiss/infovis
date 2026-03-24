@@ -140,25 +140,23 @@
     
     <div style="
         width: 100%;
+        /* El secreto es no poner un height fijo, sino dejar que el contenido respire */
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 20px 0;
-        /* Usamos aspect-ratio para que el contenedor siempre sea cuadrado como el círculo */
-        aspect-ratio: 1 / 1; 
-        max-width: 600px; /* Límite para que no empuje las otras columnas */
-        margin-left: auto;
-        margin-right: auto;
+        padding: 10px; /* Este pequeño padding evita que el borde del círculo toque el borde de la tarjeta */
     ">
         <object 
             type="image/svg+xml" 
             data="./Sunburst.svg" 
             style="
-                width: 100%; 
-                height: 100%; 
-                /* El secreto: scale aumenta el dibujo ignorando los márgenes del archivo */
-                transform: scale(1.15); 
+                width: 100%;
+                max-width: 650px; /* Ajusta este tamaño para que no se vea gigante */
+                height: auto;
                 display: block;
+                /* El navegador se encarga de que no se corte nada */
+                object-fit: contain; 
             ">
         </object>
     </div>
