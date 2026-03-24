@@ -134,7 +134,7 @@
 		<div class="columna-principal">
 			<h2 class="seccion-titulo">Análisis Detallado</h2>
 			
-		<div id="seccion-artistas" class="tarjeta" style="padding: 30px; background-color: #181818;">
+		<div id="seccion-artistas" class="tarjeta" style="padding: 30px; background-color: #181818; overflow: visible;">
     <h3>Top Artistas y Géneros</h3>
     <p>Distribución de minutos por artista y género.</p>
     
@@ -143,17 +143,19 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin: 20px 0;
-        min-height: 500px; /* Altura mínima para que no colapse */
+        margin: 0 auto;
+        padding: 20px 0;
+        min-height: auto; /* Eliminamos alturas fijas que causan el bloque blanco */
     ">
         <object 
             type="image/svg+xml" 
             data="./Sunburst.svg" 
             style="
                 width: 100%; 
+                max-width: 850px; /* Ajusta este valor si quieres que se vea más grande o chico */
                 height: auto; 
-                max-width: 800px; /* Evita que crezca demasiado y se corte */
                 display: block;
+                aspect-ratio: 1 / 1; /* Forza a que mantenga su forma circular */
             ">
         </object>
     </div>
