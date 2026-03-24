@@ -140,25 +140,27 @@
     
     <div style="
         width: 100%;
-        height: 500px; /* Ajustamos la altura de la 'ventana' */
-        overflow: hidden;
+        height: 550px; /* Altura controlada de la tarjeta */
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden; /* Recorta el aire sobrante del SVG */
+        margin: 20px 0;
         position: relative;
-        margin-top: 20px;
     ">
         <object 
             type="image/svg+xml" 
             data="./Sunburst.svg" 
             style="
-                width: 120%; /* Lo agrandamos un poco para que llene la ventana */
-                height: 120%;
-                object-fit: contain;
+                /* Agrandamos el objeto más allá del 100% para compensar sus márgenes internos */
+                width: 130%; 
+                height: 130%; 
+                object-fit: contain; /* Mantiene la proporción circular */
                 position: absolute;
+                /* Centrado matemático perfecto */
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%); /* Lo centramos matemáticamente */
+                transform: translate(-50%, -50%); 
             ">
         </object>
     </div>
@@ -169,6 +171,7 @@
     <div class="flourish-embed flourish-chart" data-src="visualisation/28130928">
         <script src="https://public.flourish.studio/resources/embed.js"></script>
     </div>
+</div>
 </div>
 
 			<div class="tarjeta">
