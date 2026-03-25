@@ -277,21 +277,19 @@
 	   10. CONTENEDOR SVG — FIX DE LA LÍNEA BLANCA
 	   ============================================= */
 
+	/* Técnica del padding-bottom para forzar la relación de aspecto exacta del SVG (940×600) */
 	.sunburst-wrapper {
+		position: relative;
 		width: 100%;
-		/* FIX: reemplazamos el truco de 120% width por un approach limpio */
-		aspect-ratio: 1 / 1;
-		max-height: 520px;
-		overflow: hidden; /* sigue ocultando bordes pero ya no desborda */
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		padding-bottom: 63.83%; /* 600/940 = 63.83% */
 		margin-top: 20px;
 		border-radius: 8px;
+		overflow: hidden;
 	}
 
-	.sunburst-wrapper object {
-		/* El SVG ocupa todo el contenedor sin salirse */
+	.sunburst-wrapper img {
+		position: absolute;
+		top: 0; left: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
@@ -467,9 +465,9 @@
 				<h3>Top Artistas y Géneros</h3>
 				<p style="color: var(--texto-secundario); margin-top: 0;">Distribución de minutos por artista y género.</p>
 
-				<!-- FIX: contenedor limpio sin overflow ni width: 120% -->
+				<!-- FIX: img es mucho más confiable que object para escalar SVGs -->
 				<div class="sunburst-wrapper">
-					<object type="image/svg+xml" data="./Sunburst.svg"></object>
+					<img src="./Sunburst.svg" alt="Sunburst de artistas y géneros">
 				</div>
 
 				<div class="divisor"></div>
