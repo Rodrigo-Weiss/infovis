@@ -26,8 +26,8 @@
 		--borde: #282828;
 	}
 
-	html, body {
-		/* FIX PRINCIPAL: evita el overflow horizontal que causaba la línea blanca */
+	html {
+		/* overflow-x solo en html, NO en body — body con overflow rompe position: sticky */
 		overflow-x: hidden;
 	}
 
@@ -456,7 +456,6 @@
 			<div class="item-leyenda"><span class="circulo-color" style="background-color:#3498DB;"></span> Podcasts</div>
 			<div class="item-leyenda"><span class="circulo-color" style="background-color:#E91E8C;"></span> Rock</div>
 		</aside>
-
 		<!-- COLUMNA CENTRAL -->
 		<div class="columna-principal">
 			<h2 class="seccion-titulo">Análisis Detallado</h2>
