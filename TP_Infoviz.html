@@ -27,7 +27,6 @@
 	}
 
 	html {
-		/* overflow-x solo en html, NO en body — body con overflow rompe position: sticky */
 		overflow-x: hidden;
 	}
 
@@ -89,9 +88,7 @@
 		margin-bottom: 10px;
 	}
 
-	.logo-titulo {
-		height: 50px;
-	}
+	.logo-titulo { height: 50px; }
 
 	.datos-tp {
 		color: var(--texto-secundario);
@@ -244,9 +241,7 @@
 		transition: border-color 0.3s ease;
 	}
 
-	.tarjeta:hover {
-		border-color: var(--borde);
-	}
+	.tarjeta:hover { border-color: var(--borde); }
 
 	.tarjeta h3 {
 		color: var(--verde);
@@ -280,7 +275,7 @@
 	.sunburst-wrapper {
 		position: relative;
 		width: 100%;
-		padding-bottom: 63.83%; /* 600/940 */
+		padding-bottom: 63.83%;
 		margin-top: 20px;
 		border-radius: 8px;
 		overflow: hidden;
@@ -370,10 +365,20 @@
 		transform: scale(1.06);
 	}
 
-	.play-btn svg {
-		width: 14px;
-		height: 14px;
-		fill: #000;
+	.play-btn svg { width: 14px; height: 14px; fill: #000; }
+
+	.play-btn:disabled {
+		background: #404040;
+		cursor: not-allowed;
+		transform: none;
+	}
+
+	.audio-error {
+		font-size: 0.68rem;
+		color: #E74C3C;
+		text-align: center;
+		display: none;
+		margin-top: 4px;
 	}
 
 	.progress-area {
@@ -424,11 +429,7 @@
 		align-items: center;
 	}
 
-	.vol-btn svg {
-		width: 14px;
-		height: 14px;
-		fill: var(--texto-secundario);
-	}
+	.vol-btn svg { width: 14px; height: 14px; fill: var(--texto-secundario); }
 
 	.volume-slider {
 		-webkit-appearance: none;
@@ -443,16 +444,14 @@
 
 	.volume-slider::-webkit-slider-thumb {
 		-webkit-appearance: none;
-		width: 10px;
-		height: 10px;
+		width: 10px; height: 10px;
 		border-radius: 50%;
 		background: var(--verde);
 		cursor: pointer;
 	}
 
 	.volume-slider::-moz-range-thumb {
-		width: 10px;
-		height: 10px;
+		width: 10px; height: 10px;
 		border-radius: 50%;
 		background: var(--verde);
 		cursor: pointer;
@@ -489,19 +488,12 @@
 			transform: none;
 			max-width: 900px;
 		}
-		.reproductor-derecha {
-			order: -1;
-		}
+		.reproductor-derecha { order: -1; }
 	}
 
 	@media (max-width: 600px) {
-		.overview-stats {
-			grid-template-columns: repeat(2, 1fr);
-		}
-		h1 {
-			flex-direction: column;
-			gap: 8px;
-		}
+		.overview-stats { grid-template-columns: repeat(2, 1fr); }
+		h1 { flex-direction: column; gap: 8px; }
 	}
 	</style>
 </head>
@@ -523,7 +515,6 @@
 			<p><strong>Materia:</strong> Infovis &nbsp;|&nbsp; <strong>Alumno:</strong> Rodrigo Weiss &nbsp;|&nbsp; <strong>Año:</strong> 2026</p>
 		</div>
 
-		<!-- STATS -->
 		<section class="overview-stats" aria-label="Estadísticas generales">
 			<div class="stat-item">
 				<span class="stat-number">251.554</span>
@@ -554,7 +545,6 @@
 
 	<div class="divisor"></div>
 
-	<!-- CONTENIDO PRINCIPAL -->
 	<main class="container">
 
 		<!-- LEYENDA DINÁMICA -->
@@ -581,9 +571,9 @@
 
 				<div class="sunburst-wrapper">
 					<img src="./Sunburst.svg" alt="Sunburst de artistas y géneros">
-					</div>
+				</div>
 				<p class="texto-insight">
-					En el top 20 se observa la gravítacion hacia el rock/heavy metal, con el hip hop como género alternativo de momentos, un podcast en particular relacionado a la serie The Office, y música de soundtracks sin letra usada a la hora de concentrarse.
+					En el top 20 se observa la gravitación hacia el rock/heavy metal, con el hip hop como género alternativo de momentos, un podcast en particular relacionado a la serie The Office, y música de soundtracks sin letra usada a la hora de concentrarse.
 				</p>
 
 				<div class="divisor"></div>
@@ -591,35 +581,76 @@
 				<h3>Prevalencia anual del top 20 de artistas</h3>
 				<div class="flourish-embed flourish-chart" data-src="visualisation/28130928">
 					<script src="https://public.flourish.studio/resources/embed.js"></script>
-					</div>
-					<p class="texto-insight">
-					Al observar la variación del top 20 a lo largo de los años es necesario destacar dos eventos que impactaron fuertemente en los hábitos y se pueden observar, recital de Roger Waters en Noviembre de 2023 y recital de La Renga en Julio de 2025 
+				</div>
+				<p class="texto-insight">
+					Al observar la variación del top 20 a lo largo de los años es necesario destacar dos eventos que impactaron fuertemente en los hábitos y se pueden observar: recital de Roger Waters en Noviembre de 2023 y recital de La Renga en Julio de 2025.
 				</p>
 			</div>
 
 			<!-- TARJETA 2: Evolución Temporal -->
 			<div class="tarjeta">
 				<h3>Evolución Temporal</h3>
-				<iframe src="https://datawrapper.dwcdn.net/8ey2N/5/?dark=true"
-    style="width:100%; min-height:458px; border:none; margin-bottom:40px;"
-    scrolling="no">
-</iframe>
-<div class="divisor"></div>
-<iframe src="https://datawrapper.dwcdn.net/sNJYF/9/?dark=true"
-    style="width:100%; min-height:655px; border:none;"
-    scrolling="no">
-</iframe>
+				<iframe
+					src="https://datawrapper.dwcdn.net/8ey2N/5/?dark=true"
+					style="width:100%; min-height:458px; border:none; margin-bottom:40px;"
+					scrolling="no">
+				</iframe>
+				<div class="divisor"></div>
+				<iframe
+					src="https://datawrapper.dwcdn.net/sNJYF/9/?dark=true"
+					style="width:100%; min-height:655px; border:none;"
+					scrolling="no">
+				</iframe>
 				<p class="texto-insight">
-					Con los gráficos de barras se puede observar una tendencia hacia el verano a la hora de escuchar música a traves de Spotify, así como tambien una tenendia en el mes de Julio, explicada por ser el mes de mayor intensidad en el trabajo durante los últimos años.
+					Con los gráficos de barras se puede observar una tendencia hacia el verano a la hora de escuchar música a través de Spotify, así como también una tendencia en el mes de Julio, explicada por ser el mes de mayor intensidad en el trabajo durante los últimos años.
 				</p>
 			</div>
 
 			<!-- TARJETA 3: Rituales -->
 			<div class="tarjeta">
 				<h3>Rituales: Día y Hora</h3>
-				<div class='tableauPlaceholder' id='viz1774650931614' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;SpotifyFinal_17746505822590&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SpotifyFinal_17746505822590&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;SpotifyFinal_17746505822590&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1774650931614');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+				<div class="tableauPlaceholder" id="viz1774650931614" style="position: relative;">
+					<noscript>
+						<a href="#">
+							<img alt="Dashboard 1" src="https://public.tableau.com/static/images/Sp/SpotifyFinal_17746505822590/Dashboard1/1_rss.png" style="border: none">
+						</a>
+					</noscript>
+					<object class="tableauViz" style="display:none;">
+						<param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+						<param name="embed_code_version" value="3" />
+						<param name="site_root" value="" />
+						<param name="name" value="SpotifyFinal_17746505822590/Dashboard1" />
+						<param name="tabs" value="no" />
+						<param name="toolbar" value="yes" />
+						<param name="static_image" value="https://public.tableau.com/static/images/Sp/SpotifyFinal_17746505822590/Dashboard1/1.png" />
+						<param name="animate_transition" value="yes" />
+						<param name="display_static_image" value="yes" />
+						<param name="display_spinner" value="yes" />
+						<param name="display_overlay" value="yes" />
+						<param name="display_count" value="yes" />
+						<param name="language" value="en-US" />
+						<param name="filter" value="publish=yes" />
+					</object>
+				</div>
+				<script type="text/javascript">
+					var divElement = document.getElementById('viz1774650931614');
+					var vizElement = divElement.getElementsByTagName('object')[0];
+					if (divElement.offsetWidth > 800) {
+						vizElement.style.width = '100%';
+						vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+					} else if (divElement.offsetWidth > 500) {
+						vizElement.style.width = '100%';
+						vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+					} else {
+						vizElement.style.width = '100%';
+						vizElement.style.height = '727px';
+					}
+					var scriptElement = document.createElement('script');
+					scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+					vizElement.parentNode.insertBefore(scriptElement, vizElement);
+				</script>
 				<p class="texto-insight">
-					En el mapa de calor se permite identificar visualmente los momentos de mayor intensidad en el uso de la app, altamente relacionado con la jornada laboral. Si filtramos por 2025, podremos ver marcados los días de oficina vs los dias que se trabajan desde casa. Los Lunes y Miercoles se presentan como los días de mayor escucha, mientras que los martes y jueves se observan los picos a la hora de ir a la oficina entre las 8AM y 9AM, para luego tener una disminución marcada.
+					En el mapa de calor se permite identificar visualmente los momentos de mayor intensidad en el uso de la app, altamente relacionado con la jornada laboral. Si filtramos por 2025, podremos ver marcados los días de oficina vs los días que se trabajan desde casa. Los Lunes y Miércoles se presentan como los días de mayor escucha, mientras que los Martes y Jueves se observan los picos a la hora de ir a la oficina entre las 8AM y 9AM, para luego tener una disminución marcada.
 					La baja importante de los fines de semana se debe a que al usar la computadora personal, se suele utilizar YouTube para escuchar música.
 				</p>
 			</div>
@@ -635,12 +666,10 @@
 				>
 				<p>For Those About to Rock — AC/DC</p>
 
-				<!-- Audio nativo oculto -->
 				<audio id="main-audio" preload="none">
 					<source src="https://drive.google.com/uc?export=download&id=1A5iohwj9D3gS_rKbEPmRCkQlwMUse3Ul" type="audio/mpeg">
 				</audio>
 
-				<!-- Reproductor custom -->
 				<div class="audio-player">
 					<div class="audio-controls">
 						<button class="play-btn" id="play-btn" aria-label="Play / Pause">
@@ -664,6 +693,10 @@
 						</button>
 						<input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.02" value="1">
 					</div>
+					<!-- Mensaje de error si el audio no carga -->
+					<p class="audio-error" id="audio-error">
+						⚠ No se pudo cargar el audio. Abrí la página con un servidor local.
+					</p>
 				</div>
 			</div>
 		</aside>
@@ -675,7 +708,7 @@
 	</footer>
 
 	<script>
-		// Leyenda dinámica con IntersectionObserver
+		// Leyenda dinámica
 		const leyenda = document.getElementById('leyenda-dinamica');
 		const seccionArtistas = document.getElementById('seccion-artistas');
 
@@ -702,6 +735,7 @@
 		const iconVol       = document.getElementById('icon-vol');
 		const iconMute      = document.getElementById('icon-mute');
 		const volSlider     = document.getElementById('volume-slider');
+		const audioError    = document.getElementById('audio-error');
 
 		function fmt(s) {
 			const m   = Math.floor(s / 60);
@@ -709,13 +743,21 @@
 			return m + ':' + (sec < 10 ? '0' : '') + sec;
 		}
 
+		// Error de carga — muestra mensaje y deshabilita botón
+		audio.addEventListener('error', () => {
+			audioError.style.display = 'block';
+			playBtn.disabled = true;
+		});
+
 		playBtn.addEventListener('click', () => {
-			if (audio.paused) { audio.play(); } else { audio.pause(); }
+			if (audio.paused) { audio.play().catch(() => { audioError.style.display = 'block'; }); }
+			else { audio.pause(); }
 		});
 
 		audio.addEventListener('play', () => {
 			iconPlay.style.display  = 'none';
 			iconPause.style.display = 'block';
+			audioError.style.display = 'none';
 		});
 
 		audio.addEventListener('pause', () => {
